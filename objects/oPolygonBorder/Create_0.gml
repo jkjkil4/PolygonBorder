@@ -199,7 +199,7 @@ function updateDivide() {
 			}
 		}
 		if(!divided) {	//当出现死循环时（大多是因为多边形的边出现相交）直接结束
-			ds_list_clear(listVertex);
+			ds_list_clear(listDivideIndex);
 			ds_list_destroy(listVertexTmp);	//销毁临时顶点列表
 			ds_list_destroy(marker);	//销毁
 			return;

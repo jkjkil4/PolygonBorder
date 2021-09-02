@@ -12,7 +12,7 @@ for(var i = 0; i < size; i++) {
 	draw_primitive_begin(pr_trianglelist);
 	for(var j = 0; j < 3; j++) {
 		var pos = listVertex[| di[j]];
-		draw_vertex(pos[0], pos[1]);
+		draw_vertex(x + pos[0], y + pos[1]);
 	}
 	draw_primitive_end();
 }
