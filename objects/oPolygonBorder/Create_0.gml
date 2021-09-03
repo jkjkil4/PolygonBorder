@@ -220,15 +220,17 @@ function updateDivide() {
 //     _surface: 传入的surface，将会对其进行修改
 //     _xOffset: 限制区域的横向偏移量，一般为0即可
 //     _yOffset: 限制区域的纵向偏移量，一般为0即可
-function replaceSurfaceAlpha(_surface, _xOffset = 0, _yOffset = 0) {
+function replaceSurfaceAlpha(_surface, _xOffset = 0, _yOffset = 0, _fillAlpha = true) {
 	//一些设定
 	surface_set_target(_surface);
 	gpu_set_colorwriteenable(false, false, false, true);
 	gpu_set_blendenable(false);
 	
 	//填充透明
-	draw_set_alpha(0);
-	draw_rectangle(0, 0, surface_get_width(_surface), surface_get_height(_surface), false);
+	if(_fillAlpha) {
+		draw_set_alpha(0);
+		draw_rectangle(0, 0, surface_get_width(_surface), surface_get_height(_surface), false);
+	}
 	
 	//挖空
 	draw_set_alpha(1);

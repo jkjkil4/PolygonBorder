@@ -6,6 +6,8 @@ draw_clear_alpha(c_black, 0);
 draw_circle_color(x, y, 6, c_red, c_red, false);
 surface_reset_target();
 
-polygon.replaceSurfaceAlpha(surf);	//遮罩
-draw_surface(surf, 0, 0);	//绘制遮罩结果
-polygon.drawBorder();	//绘制边框
+poly1.replaceSurfaceAlpha(surf);	//遮罩
+poly2.replaceSurfaceAlpha(surf, 0, 0, false);
+
+drawSurfaceStrokeColor(surf, 0, 0, c_white); //绘制surface和边框
+

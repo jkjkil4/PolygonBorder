@@ -1,6 +1,9 @@
 {
   "resources": [
+    {"id":{"name":"ScrPolygon","path":"scripts/ScrPolygon/ScrPolygon.yy",},"order":0,},
     {"id":{"name":"oPolygonBorder","path":"objects/oPolygonBorder/oPolygonBorder.yy",},"order":0,},
+    {"id":{"name":"shaderDrawStroke","path":"shaders/shaderDrawStroke/shaderDrawStroke.yy",},"order":0,},
+    {"id":{"name":"oMovingPolygonBorder","path":"objects/oMovingPolygonBorder/oMovingPolygonBorder.yy",},"order":2,},
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},"order":1,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
