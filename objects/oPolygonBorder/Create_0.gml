@@ -81,8 +81,14 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 	//根据交点对是否在内部进行判断
 	var isInside = false;
 	for(var i = 0; i < count; i++) {
-		if(intersections[i] > xx)
-			return isInside;
+		if(intersections[i] > xx) {
+			if(isInside) {
+				return true;
+			} else {
+				show_debug_message(intersections);
+				return false;
+			}
+		}
 		isInside = !isInside;
 	}
     return false;
