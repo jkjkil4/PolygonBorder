@@ -10,6 +10,7 @@
 
 listVertex = ds_list_create();	//多边形的顶点，请使用ds_list_add、ds_list_delete等进行操作
 listDivideIndex = ds_list_create();	//多边形的三角剖分
+rot = 0;	//旋转角度（顺时针）
 isAutoDrawBorder = true;	//是否自动绘制框，如果为false可以在其他地方手动调用drawBorder
 
 // [返回点是否在多边形内]
@@ -28,6 +29,9 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 	var size = ds_list_size(_listVertex);
 	if(size < 2)	//若顶点数量不足则返回false
 		return false;
+		
+	var vsin = dsin(-rot), vcos = dcos(-rot);
+	var xx = _x * vcos - _y * vsin, yy = _x * vsin + _y * vcos;
 	
 	//从末尾开始遍历得到第一个不为水平的线的 走向 和 交点情况
 	var isAllHor = true, prevTrend = false, prevHasIntersection = false;
@@ -37,7 +41,7 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 		if(prev[1] != cur[1]) {
 			isAllHor = false;
 			prevTrend = cur[1] < prev[1];	//因为是反向遍历，所以是小于（和后面的大于相反）
-			prevHasIntersection = (_y >= min(prev[1], cur[1]) && _y <= max(prev[1], cur[1]));
+			prevHasIntersection = (yy >= min(prev[1], cur[1]) && yy <= max(prev[1], cur[1]));
 			break;
 		}
 		prev = cur;
@@ -54,10 +58,10 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 		if(prev[1] != cur[1]) {
 			var trend = cur[1] > prev[1];
 			if(trend != prevTrend || !prevHasIntersection) {
-				if(_y >= min(prev[1], cur[1]) && _y <= max(prev[1], cur[1])) {
+				if(yy >= min(prev[1], cur[1]) && yy <= max(prev[1], cur[1])) {
 					hasIntersection = true;
 					intersections[count] = prev[0] + (cur[0] - prev[0]) 
-						* (_y - prev[1]) / (cur[1] - prev[1]);
+						* (yy - prev[1]) / (cur[1] - prev[1]);
 					count++;
 				}
 			}
@@ -75,7 +79,7 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 	//根据交点对是否在内部进行判断
 	var isInside = false;
 	for(var i = 0; i < count; i++) {
-		if(intersections[i] > _x)
+		if(intersections[i] > xx)
 			return isInside;
 		isInside = !isInside;
 	}
@@ -94,35 +98,39 @@ function limit(_x, _y) {
 	
 	_x -= x;
 	_y -= y;
+	var vsin = dsin(rot), vcos = dcos(rot);
+	var xx = _x * vcos + _y * vsin, yy = -_x * vsin + _y * vcos;
 	
 	var nearestPos, nearestDis = -1;
 	var prev = listVertex[| size - 1], cur;
 	for(var i = 0; i < size; i++) {
 		cur = listVertex[| i];
-		if((prev[0] - _x) * (prev[0] - cur[0]) + (prev[1] - _y) * (prev[1] - cur[1]) < 0) {
-			var dis = point_distance(_x, _y, prev[0], prev[1]);
+		if((prev[0] - xx) * (prev[0] - cur[0]) + (prev[1] - yy) * (prev[1] - cur[1]) < 0) {
+			var dis = point_distance(xx, yy, prev[0], prev[1]);
 			if(dis < nearestDis || nearestDis == -1) {
 				nearestDis = dis;
 				nearestPos = prev;
 			}
-		} else if((cur[0] - _x) * (cur[0] - prev[0]) + (cur[1] - _y) * (cur[1] - prev[1]) < 0) {
-			var dis = point_distance(_x, _y, cur[0], cur[1]);
+		} else if((cur[0] - xx) * (cur[0] - prev[0]) + (cur[1] - yy) * (cur[1] - prev[1]) < 0) {
+			var dis = point_distance(xx, yy, cur[0], cur[1]);
 			if(dis < nearestDis || nearestDis == -1) {
 				nearestDis = dis;
 				nearestPos = cur;
 			}
 		} else {
-			var k = ((_y - prev[1]) * (cur[0] - prev[0]) - (_x - prev[0]) * (cur[1] - prev[1]))
+			var k = ((yy - prev[1]) * (cur[0] - prev[0]) - (xx - prev[0]) * (cur[1] - prev[1]))
 				/ (sqr(cur[1] - prev[1]) + sqr(cur[0] - prev[0]));
 			var dis = abs(k) * point_distance(prev[0], prev[1], cur[0], cur[1]);
 			if(dis < nearestDis || nearestDis == -1) {
 				nearestDis = dis;
-				nearestPos = [_x + k * (cur[1] - prev[1]), _y + k * (prev[0] - cur[0])];
+				nearestPos = [xx + k * (cur[1] - prev[1]), yy + k * (prev[0] - cur[0])];
 			}
 		}
 		prev = cur;
 	}
-	return [nearestPos[0] + x, nearestPos[1] + y];
+	var resultx = nearestPos[0] * vcos - nearestPos[1] * vsin;
+	var resulty = nearestPos[0] * vsin + nearestPos[1] * vcos;
+	return [resultx + x, resulty + y];
 }
 
 // 用于更新多边形的三角剖分
@@ -234,13 +242,16 @@ function replaceSurfaceAlpha(_surface, _xOffset = 0, _yOffset = 0, _fillAlpha = 
 	
 	//挖空
 	draw_set_alpha(1);
+	var vsin = dsin(rot), vcos = dcos(rot);
 	var size = ds_list_size(listDivideIndex);
 	for(var i = 0; i < size; i++) {	//遍历所有的三角
 		var di = listDivideIndex[| i];
 		draw_primitive_begin(pr_trianglelist);
 		for(var j = 0; j < 3; j++) {
 			var pos = listVertex[| di[j]];
-			draw_vertex(x + _xOffset + pos[0], y + _yOffset + pos[1]);
+			var resultx = pos[0] * vcos - pos[1] * vsin;
+			var resulty = pos[0] * vsin + pos[1] * vcos;
+			draw_vertex(x + _xOffset + resultx, y + _yOffset + resulty);
 		}
 		draw_primitive_end();
 	}
@@ -253,9 +264,14 @@ function replaceSurfaceAlpha(_surface, _xOffset = 0, _yOffset = 0, _fillAlpha = 
 
 // 用于绘制边框，如果isAutoDrawBorder为true，则会自动调用
 function drawBorder() {
+	var vsin = dsin(rot), vcos = dcos(rot);
 	for(var i = 0; i < ds_list_size(listVertex); i++) {
 		var a = listVertex[| i], b = listVertex[| iloop(i + 1)];
-		draw_line_width(x + a[0], y + a[1], x + b[0], y + b[1], 5);
+		var ax = a[0] * vcos - a[1] * vsin;
+		var ay = a[0] * vsin + a[1] * vcos;
+		var bx = b[0] * vcos - b[1] * vsin;
+		var by = b[0] * vsin + b[1] * vcos;
+		draw_line_width(x + ax, y + ay, x + bx, y + by, 5);
 	}
 }
 

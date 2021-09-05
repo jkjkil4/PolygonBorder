@@ -1,6 +1,7 @@
 {
   "resources": [
     {"id":{"name":"ScrPolygon","path":"scripts/ScrPolygon/ScrPolygon.yy",},"order":0,},
+    {"id":{"name":"sDemo1","path":"sprites/sDemo1/sDemo1.yy",},"order":0,},
     {"id":{"name":"oPolygonBorder","path":"objects/oPolygonBorder/oPolygonBorder.yy",},"order":0,},
     {"id":{"name":"shaderDrawStroke","path":"shaders/shaderDrawStroke/shaderDrawStroke.yy",},"order":0,},
     {"id":{"name":"oMovingPolygonBorder","path":"objects/oMovingPolygonBorder/oMovingPolygonBorder.yy",},"order":2,},
