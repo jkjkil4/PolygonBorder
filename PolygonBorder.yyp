@@ -1,9 +1,11 @@
 {
   "resources": [
-    {"id":{"name":"Scr","path":"scripts/Scr/Scr.yy",},"order":0,},
-    {"id":{"name":"sDemo1","path":"sprites/sDemo1/sDemo1.yy",},"order":0,},
+    {"id":{"name":"Script","path":"scripts/Script/Script.yy",},"order":0,},
+    {"id":{"name":"rDemo2","path":"rooms/rDemo2/rDemo2.yy",},"order":1,},
+    {"id":{"name":"oSystem","path":"objects/oSystem/oSystem.yy",},"order":3,},
     {"id":{"name":"oPolygonBorder","path":"objects/oPolygonBorder/oPolygonBorder.yy",},"order":0,},
     {"id":{"name":"shaderDrawStroke","path":"shaders/shaderDrawStroke/shaderDrawStroke.yy",},"order":0,},
+    {"id":{"name":"oDemo2","path":"objects/oDemo2/oDemo2.yy",},"order":0,},
     {"id":{"name":"oDemo1","path":"objects/oDemo1/oDemo1.yy",},"order":0,},
     {"id":{"name":"rDemo1","path":"rooms/rDemo1/rDemo1.yy",},"order":0,},
   ],
@@ -22,15 +24,17 @@
   },
   "RoomOrderNodes": [
     {"roomId":{"name":"rDemo1","path":"rooms/rDemo1/rDemo1.yy",},},
+    {"roomId":{"name":"rDemo2","path":"rooms/rDemo2/rDemo2.yy",},},
   ],
   "Folders": [
-    {"folderPath":"folders/Sprites.yy","order":1,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Paths.yy","order":4,"resourceVersion":"1.0","name":"Paths","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Scripts.yy","order":5,"resourceVersion":"1.0","name":"Scripts","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Shaders.yy","order":6,"resourceVersion":"1.0","name":"Shaders","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Objects.yy","order":9,"resourceVersion":"1.0","name":"Objects","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Rooms.yy","order":10,"resourceVersion":"1.0","name":"Rooms","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Objects/Demos.yy","order":2,"resourceVersion":"1.0","name":"Demos","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Objects/Demos/Demo1.yy","order":3,"resourceVersion":"1.0","name":"Demo1","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Objects/Demos/Demo2.yy","order":4,"resourceVersion":"1.0","name":"Demo2","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

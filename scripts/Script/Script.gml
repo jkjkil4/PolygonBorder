@@ -1,6 +1,9 @@
+// 得到窗口宽度
 function viewW(_id = 0) { return camera_get_view_width(view_camera[_id]); }
+// 得到窗口高度
 function viewH(_id = 0) { return camera_get_view_height(view_camera[_id]); }
 
+// surface描边
 function drawSurfaceStrokeColor(_surf, _x, _y, _color) {
 	var uSurfaceSize = shader_get_uniform(shaderDrawStroke, "v_vSurfaceSize");
 	var uColor = shader_get_uniform(shaderDrawStroke, "v_vStrokeColor");
@@ -10,3 +13,4 @@ function drawSurfaceStrokeColor(_surf, _x, _y, _color) {
 	draw_surface(_surf, _x, _y);
 	shader_reset();
 }
+

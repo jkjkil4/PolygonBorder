@@ -12,6 +12,7 @@
 listVertex = ds_list_create();	//多边形的顶点，请使用ds_list_add、ds_list_delete等进行操作
 listDivideIndex = ds_list_create();	//多边形的三角剖分
 rot = 0;	//旋转角度（顺时针）
+rotSpeed = 0;	//旋转速度
 isAutoDrawBorder = true;	//是否自动绘制框，如果为false可以在其他地方手动调用drawBorder
 
 // [返回点是否在多边形内]

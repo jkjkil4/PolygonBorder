@@ -26,8 +26,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Demos",
-    "path": "folders/Objects/Demos.yy",
+    "name": "Demo1",
+    "path": "folders/Objects/Demos/Demo1.yy",
   },
   "resourceVersion": "1.0",
   "name": "oDemo1",

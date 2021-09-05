@@ -16,5 +16,3 @@ drawSurfaceStrokeColor(surf, 0, 0, c_white);	//把遮罩结果和框画出来，
 //draw_surface(surf, 0, 0);
 //poly.drawBorder();
 draw_circle_color(x, y, 6, c_red, c_red, false);	//画自己（写在这里不被遮罩影响）
-
-
