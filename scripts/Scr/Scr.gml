@@ -1,3 +1,5 @@
+function viewW(_id = 0) { return camera_get_view_width(view_camera[_id]); }
+function viewH(_id = 0) { return camera_get_view_height(view_camera[_id]); }
 
 function drawSurfaceStrokeColor(_surf, _x, _y, _color) {
 	var uSurfaceSize = shader_get_uniform(shaderDrawStroke, "v_vSurfaceSize");

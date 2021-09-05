@@ -7,6 +7,7 @@
 // 缺点: 
 //     当在拐角移动时，可能穿过拐角（不会出框，原本是要绕过去）
 //     只能限制点（对于较小的物体实际上也可以当成一个点）
+//     编辑不便
 
 listVertex = ds_list_create();	//多边形的顶点，请使用ds_list_add、ds_list_delete等进行操作
 listDivideIndex = ds_list_create();	//多边形的三角剖分
@@ -228,6 +229,7 @@ function updateDivide() {
 //     _surface: 传入的surface，将会对其进行修改
 //     _xOffset: 限制区域的横向偏移量，一般为0即可
 //     _yOffset: 限制区域的纵向偏移量，一般为0即可
+//     _fillAlpha: 是否将alpha全设为0，用于多个多边形叠加时，第一个传入true，其余传入false以叠加遮罩
 function replaceSurfaceAlpha(_surface, _xOffset = 0, _yOffset = 0, _fillAlpha = true) {
 	//一些设定
 	surface_set_target(_surface);
