@@ -56,8 +56,8 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 	prev = _listVertex[| size - 1];
 	for(var i = 0; i < size; i++) {
 		cur = _listVertex[| i];
-		var hasIntersection = false;
 		if(prev[1] != cur[1]) {
+			var hasIntersection = false;
 			var trend = cur[1] > prev[1];
 			if(trend != prevTrend || !prevHasIntersection) {
 				if(yy >= min(prev[1], cur[1]) && yy <= max(prev[1], cur[1])) {
@@ -69,8 +69,8 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 			}
 			if(trend != prevTrend)
 				prevTrend = trend;
+			prevHasIntersection = hasIntersection;
 		}
-		prevHasIntersection = hasIntersection;
 		prev = cur;
 	}
 	if(count == 0)	//如果没有交点，则返回false
@@ -81,14 +81,8 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 	//根据交点对是否在内部进行判断
 	var isInside = false;
 	for(var i = 0; i < count; i++) {
-		if(intersections[i] > xx) {
-			if(isInside) {
-				return true;
-			} else {
-				show_debug_message(intersections);
-				return false;
-			}
-		}
+		if(intersections[i] > xx)
+			return isInside;
 		isInside = !isInside;
 	}
     return false;
