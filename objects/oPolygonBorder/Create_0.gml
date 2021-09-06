@@ -227,20 +227,20 @@ function updateDivide() {
 
 // 用于更改surface的alpha以达到限制显示范围的目的（遮罩）
 // 传入参数:
-//     _surface: 传入的surface，将会对其进行修改
+//     _surf: 传入的surface，将会对其进行修改
 //     _xOffset: 限制区域的横向偏移量，一般为0即可
 //     _yOffset: 限制区域的纵向偏移量，一般为0即可
 //     _fillAlpha: 是否将alpha全设为0，用于多个多边形叠加时，第一个传入true，其余传入false以叠加遮罩
-function replaceSurfaceAlpha(_surface, _xOffset = 0, _yOffset = 0, _fillAlpha = true) {
+function replaceSurfaceAlpha(_surf, _xOffset = 0, _yOffset = 0, _fillAlpha = true) {
 	//一些设定
-	surface_set_target(_surface);
+	surface_set_target(_surf);
 	gpu_set_colorwriteenable(false, false, false, true);
 	gpu_set_blendenable(false);
 	
 	//填充透明
 	if(_fillAlpha) {
 		draw_set_alpha(0);
-		draw_rectangle(0, 0, surface_get_width(_surface), surface_get_height(_surface), false);
+		draw_rectangle(0, 0, surface_get_width(_surf), surface_get_height(_surf), false);
 	}
 	
 	//挖空
