@@ -1,8 +1,8 @@
 {
   "type": 1,
   "parent": {
-    "name": "Shaders",
-    "path": "folders/Shaders.yy",
+    "name": "Main",
+    "path": "folders/Main.yy",
   },
   "resourceVersion": "1.0",
   "name": "shaderDrawStroke",

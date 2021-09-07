@@ -25,8 +25,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "Main",
+    "path": "folders/Main.yy",
   },
   "resourceVersion": "1.0",
   "name": "oPolygonBorder",

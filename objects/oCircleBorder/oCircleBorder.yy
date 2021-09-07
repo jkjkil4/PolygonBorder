@@ -24,7 +24,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Demo4",
-    "path": "folders/Objects/Demos/Demo4.yy",
+    "path": "folders/Main/Demos/Demo4.yy",
   },
   "resourceVersion": "1.0",
   "name": "oCircleBorder",
