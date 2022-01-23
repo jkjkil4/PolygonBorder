@@ -12,6 +12,28 @@
 - **多边形框旋转**
 - **多边形框叠加（[示例3](objects/oDemo3)和[示例4](objects/oDemo4)中有涉及）**
 
+### 潜在的问题
+由于yoyosb，原先能正常运行的代码，现在yoyo不知道搞什么，  
+给oPolygonBorder的Create事件的第79行array_sort报错，并且提示说是camera_create_view参数错误（一点关联都没有），  
+解决方法：将原本的array_sort注释掉，自己写一个从小到大排序的算法，  
+如以冒泡排序为例（最好写更高效的算法，仅举例）：
+```javascript
+......
+
+for(var i = 0; i < count - 1; i++) {
+    for(var j = 0; j < count - 1; j++) {
+        if intersections[j] > intersections[j + 1] {
+            var swaptmp = intersections[j + 1];
+            intersections[j + 1] = intersections[j];
+            intersections[j] = swaptmp;
+        }
+    }
+}
+//array_sort(intersections, lb_sort_ascending);	//从小到大对交点横坐标进行排序
+
+......
+```
+
 ### 使用
 - 创建框
     - oPolyBorder是框的对象  
