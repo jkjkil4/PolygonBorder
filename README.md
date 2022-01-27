@@ -21,7 +21,7 @@
 ......
 
 for(var i = 0; i < count - 1; i++) {
-    for(var j = 0; j < count - 1; j++) {
+    for(var j = 0; j < count - 1 - i; j++) {
         if intersections[j] > intersections[j + 1] {
             var swaptmp = intersections[j + 1];
             intersections[j + 1] = intersections[j];
