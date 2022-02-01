@@ -2,4 +2,3 @@
 
 if(isAutoDrawBorder)
 	drawBorder();
-

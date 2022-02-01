@@ -75,8 +75,9 @@ function relativeContains(_x, _y, _listVertex = listVertex) {
 	}
 	if(count == 0)	//如果没有交点，则返回false
 		return false;
+
+	array_sort(intersections, true);	//从小到大对交点横坐标进行排序
 	
-	array_sort(intersections, lb_sort_ascending);	//从小到大对交点横坐标进行排序
 	
 	//根据交点对是否在内部进行判断
 	var isInside = false;
